@@ -1,0 +1,33 @@
+/* Minimal CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Remove default button styles */
+button {
+  border: none;
+  outline: none;
+}
+
+/* Remove default input styles */
+input, select {
+  outline: none;
+}
+
+/* Remove default table styles */
+table {
+  border-collapse: collapse;
+}
+
+/* Remove default link styles */
+a {
+  text-decoration: none;
+}
+
