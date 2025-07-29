@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import './App.css'
 
-const API_BASE = window.location.origin;
+// const API_BASE = window.location.origin;
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 
 // Admin Dashboard Component
 function AdminDashboard() {
