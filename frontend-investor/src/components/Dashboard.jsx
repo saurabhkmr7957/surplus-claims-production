@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getApiBaseUrl } from "../lib/utils";
 
 const Dashboard = ({ userId = 1, onSignOut, onStartInvestment }) => {
   const [portfolio, setPortfolio] = useState(null);
@@ -6,6 +7,8 @@ const Dashboard = ({ userId = 1, onSignOut, onStartInvestment }) => {
   const [claims, setClaims] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const API_BASE = getApiBaseUrl();
 
   useEffect(() => {
     fetchData();
@@ -16,21 +19,21 @@ const Dashboard = ({ userId = 1, onSignOut, onStartInvestment }) => {
       setLoading(true);
       
       // Fetch user portfolio
-      const portfolioResponse = await fetch(`/api/users/${userId}/portfolio`);
+      const portfolioResponse = await fetch(`${API_BASE}/api/users/${userId}/portfolio`);
       if (portfolioResponse.ok) {
         const portfolioData = await portfolioResponse.json();
         setPortfolio(portfolioData);
       }
 
       // Fetch investment packages
-      const packagesResponse = await fetch('/api/packages');
+      const packagesResponse = await fetch(`${API_BASE}/api/packages`);
       if (packagesResponse.ok) {
         const packagesData = await packagesResponse.json();
         setPackages(packagesData);
       }
 
       // Fetch claims
-      const claimsResponse = await fetch('/api/claims');
+      const claimsResponse = await fetch(`${API_BASE}/api/claims`);
       if (claimsResponse.ok) {
         const claimsData = await claimsResponse.json();
         setClaims(claimsData);
@@ -46,7 +49,7 @@ const Dashboard = ({ userId = 1, onSignOut, onStartInvestment }) => {
 
   const makeInvestment = async (packageId, amount) => {
     try {
-      const response = await fetch('/api/invest', {
+      const response = await fetch(`${API_BASE}/api/invest`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
