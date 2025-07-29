@@ -15,6 +15,11 @@ def create_app(config_name=None):
     
     # Enable CORS
     CORS(app, origins=app.config['CORS_ORIGINS'])
+
+    # ✅ Health check route for App Runner
+    @app.route("/")
+    def index():
+        return "✅ Surplus Claims API is running!", 200
     
     return app
 
